@@ -1,0 +1,81 @@
+<html>
+   <head>
+    <center> <title>My Digital Footprint</title> </center>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+     <style = "text/css">
+		h1{color:white;}
+		legend{color: white;}
+	 h2{color: white;}
+       .container {
+         max-width: 1000px;}
+		 table{border: 1px solid black; background-color: white;}
+		 th{border: 5px solid red;}
+		 td {border: 5px solid red;}
+		 body{background-image: url("lossimg.jpg"); width: 100%; height:100%; background-repeat: no-repeat;}
+		 small{color: white;}
+     </style>
+   </head>
+   <body>
+     <div class="container">
+       <h1>This is your footprint.</h1>
+       <form role="form" method='POST' action='/'>
+         <div class="form-group">
+		 <!-- This data is recieved from HIBP (IhaveIBeenPwned)-->
+           <legend>This table is showing you where your information might have been either leaked or breached</legend>
+           <ul class=Breachlist>
+            <center> <h2>Breaches</h2> </center>
+            <center> <table bgcolor="#FFFFFF">
+              <tr><th> Name</th>
+                <th> URL</th></tr>
+             {% for key, value in Breachlist.items() %}
+               <tr> <td> {{ key }} </td>
+                 <td> {{ value }} </td> </tr>
+             {% else %}
+               <li><em bgcolor = "#FFFFFF"> No return, congrats</em>
+             {% endfor %}
+           </table> </center>
+		   <!--This is data recieved from pipl-->
+           <legend>This is some personal information that can be found of you easily on the internet.</legend>
+			<center> <h2>Personal data</h2></center>
+         <center> <table bgcolor="#FFFFFF">
+           {% for k in response %}
+            <th>{{ k }}</th><tr>
+              {% for x in response[k] %}
+                <td> {{ x }} </td><tr>
+           {% endfor %}
+
+
+           {% else %}
+            <li> <em bgcolor = "#FFFFFF"> No return, congrats</em>
+              {% endfor %}
+            {% for key, value in irdata.items() %}
+             <tr>
+              <th>{{ key }}</th><tr>
+               <td>{{ value }}</td>
+            {% endfor %}
+          </table> </center>
+          </ul>
+        </div>
+    <!-- <center> <a href ="/" class="btn btn-info" role="Button">back</a> </center>-->
+
+
+       </form>
+      <br>
+      {% for error in errors.items() %}
+         <h4>{{ error }}</h4>
+      {% endfor %}
+     </div>
+     <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	 <!--Disclaimer of incorrect information-->
+	<small>
+    	<center><a href="/" class="button"><span></span>Back</a></center>
+    <br>
+    <br>Liability of information Disclaimer:
+			<br>All information that is provided on this server is provided for informational purposes only.
+            <br>Not all information may no correct but every reasonable effort is made to present current and accurate information.
+			<br>We do not guarantee any kind and cannot be held liable for any outdated or incorrect information.
+			<br>We do not control, monitor, or guarantee the accuracy of the information contained and maintained in these external sources.</small>
+   </body>
+</html>
