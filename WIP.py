@@ -23,6 +23,7 @@ def hibpmet(username):
     if accountname == "":
         print('Please re-run the program with a valid username.')
     else:
+        #This should deal with most errors
         if resp.status_code == 404:
             print("Congratulations, you have not been pwned!")
         elif resp.status_code == 400:
@@ -52,11 +53,13 @@ def piplcall(person):
     request = SearchAPIRequest(person=person, api_key='COMMUNITY-pic8fj515nn0sgmq1wrvsa8f')
     response = request.send()
     personresponse = response.person
+    #This personaldata{} is going to hold the information and display it accordingly.
     personaldata = {}
     personaldata['Name'] = []
     personaldata['Email'] = []
     personaldata['Education'] = []
     personaldata['Job'] = []
+    #This irdata[] is going to hold all the information seen as irrelevent
     irdata  = {}
     irdata['Username'] = []
     irdata['Address'] = []
