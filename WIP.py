@@ -13,7 +13,7 @@ import collections
 #env = Environment(loader=PackageLoader('C:\users\zubrowjt\Desktop\Interalliance','templates'))
 
 errors = []
-
+#This method uses HIBP to recieve/send the information available
 def hibpmet(username):
     breachcount = 1
     hibpurl = "https://haveibeenpwned.com/api/v2/breachedaccount/"
@@ -40,12 +40,13 @@ def hibpmet(username):
         else:
             print("Error encountered! Please run the program again with a valid username")
 
+#This removes the additional characters that is recieved when you update and try to pull the information from both websites
 def repstring(strtr):
     charrep = ['[', '\'', ']', '"']
     for ch in charrep:
         strtr = strtr.replace(ch,"")
 
-
+# This method deals with the information inputed and sends the input to pipl then continues to recieve the output and send it back
 def piplcall(person):
 
     request = SearchAPIRequest(person=person, api_key='COMMUNITY-pic8fj515nn0sgmq1wrvsa8f')
@@ -95,6 +96,7 @@ def piplcall(person):
     for image in personresponse.images:
         irdata['Images'].append(image.url)
 
+#This loop will return boolean values for personal information and irrelevent data  to protect the user to a degree
     for v in irdata:
         k = v
         if irdata[k]:
@@ -113,7 +115,7 @@ def piplcall(person):
     return personaldata, irdata
 
 
-
+#This is the form regarding recieving input and recieving output
 app = Flask(__name__, static_url_path = "" , static_folder = "static/images" )
 @app.route('/', methods=['GET', 'POST'])
 def index():
